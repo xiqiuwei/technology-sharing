@@ -18,7 +18,7 @@ import java.util.Set;
  * @Description
  * @Modified By:
  */
-
+@SuppressWarnings("unused")
 @Component
 public class RedisReference {
     @Autowired
@@ -86,5 +86,12 @@ public class RedisReference {
             String value = iterator.next().getValue();
             System.err.println(key + ":" + value);
         }
+    }
+
+    public void listGenre() {
+        Jedis jedis = pool.getResource();
+        jedis.lpush("score","1","2","3","4","5","6","7","8","9","0");
+        String rpop = jedis.rpop("score");
+        System.err.println("这是弹出的值"+rpop);
     }
 }

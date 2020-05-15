@@ -19,7 +19,7 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
-@SuppressWarnings("all")
+
 /**
  * @Author xiqiuwei
  * @Date Created in 9:10 2019/8/9
@@ -105,6 +105,7 @@ public class JwtUtils {
      * @Param [response, errorCode]
      * @Description 返回自定义错误信息
      */
+    @SuppressWarnings("Duplicates")
     public void render(HttpServletResponse response, ErrorCode errorCode) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         response.setContentType("application/json;charset=UTF-8");

@@ -1,11 +1,9 @@
 package com.management.controlleradvice.demo.filter;
 
-import cn.hutool.system.UserInfo;
 import management.auth.common.entity.ErrorCode;
 import management.auth.common.entity.User;
 import management.auth.common.gettoken.JwtUtils;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;

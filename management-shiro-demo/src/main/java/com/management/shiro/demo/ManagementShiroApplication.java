@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Description
  * @Modified By:
  */
-@MapperScan({"com.management.shiro.demo.dao"})
+@MapperScan({"com.management.shiro.threaddemo.dao"})
 @SpringBootApplication
 public class ManagementShiroApplication {
     public static void main(String[] args) {

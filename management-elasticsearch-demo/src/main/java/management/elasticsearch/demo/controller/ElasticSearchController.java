@@ -57,7 +57,7 @@ public class ElasticSearchController {
     private StudentElasticSearchRepository studentElasticSearchRepository;
 
     /**
-     * @return management.elasticsearch.demo.entity.ResponseEntity
+     * @return management.elasticsearch.threaddemo.entity.ResponseEntity
      * @Author xiqiuwei
      * @Date 14:59  2019/8/22
      * @Param [userInfo]
@@ -75,7 +75,7 @@ public class ElasticSearchController {
     }
 
     /**
-     * @return management.elasticsearch.demo.entity.ResponseEntity
+     * @return management.elasticsearch.threaddemo.entity.ResponseEntity
      * @Author xiqiuwei
      * @Date 11:26  2019/8/23
      * @Param student
@@ -93,7 +93,7 @@ public class ElasticSearchController {
     }
 
     /**
-     * @return management.elasticsearch.demo.entity.ResponseEntity<java.util.List                                                               <                                                               management.elasticsearch.demo.entity.UserInfo>>
+     * @return management.elasticsearch.threaddemo.entity.ResponseEntity<java.util.List                                                               <                                                               management.elasticsearch.threaddemo.entity.UserInfo>>
      * @Author xiqiuwei
      * @Date 11:26  2019/8/23
      * @Param [word, name, pageable]
@@ -115,7 +115,7 @@ public class ElasticSearchController {
     }
 
     /**
-     * @return management.elasticsearch.demo.entity.ResponseEntity
+     * @return management.elasticsearch.threaddemo.entity.ResponseEntity
      * @Author xiqiuwei
      * @Date 15:36  2019/8/23
      * @Param [id, bimInfoId, pageable]
@@ -141,7 +141,7 @@ public class ElasticSearchController {
     }
 
     /**
-     * @return management.elasticsearch.demo.entity.ResponseEntity
+     * @return management.elasticsearch.threaddemo.entity.ResponseEntity
      * @Author xiqiuwei
      * @Date 15:45  2019/8/23
      * @Param [name]
@@ -181,7 +181,7 @@ public class ElasticSearchController {
      *@Author xiqiuwei
      *@Date 8:44  2019/8/27
      *@Param [subject]
-     *@return management.elasticsearch.demo.entity.ResponseEntity
+     *@return management.elasticsearch.threaddemo.entity.ResponseEntity
      *@Description 简单的聚合函数，根据学课来归类一类学生
      */
     @GetMapping("aggeregation")

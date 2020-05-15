@@ -96,16 +96,16 @@ public class MpGenerator {
                         .setRestControllerStyle(true)
                         //.setExclude(new String[]{"test"}) // 排除生成的表
                         // 自定义实体父类
-                        // .setSuperEntityClass("com.baomidou.demo.TestEntity")
+                        // .setSuperEntityClass("com.baomidou.threaddemo.TestEntity")
                         // 自定义实体，公共字段
                         //.setSuperEntityColumns(new String[]{"test_id"})
                         //.setTableFillList(tableFillList)
                         // 自定义 mapper 父类 默认BaseMapper
                         //.setSuperMapperClass("com.baomidou.mybatisplus.mapper.BaseMapper")
                         // 自定义 service 父类 默认IService
-                        // .setSuperServiceClass("com.baomidou.demo.TestService")
+                        // .setSuperServiceClass("com.baomidou.threaddemo.TestService")
                         // 自定义 service 实现类父类 默认ServiceImpl
-                        // .setSuperServiceImplClass("com.baomidou.demo.TestServiceImpl")
+                        // .setSuperServiceImplClass("com.baomidou.threaddemo.TestServiceImpl")
                         // 自定义 controller 父类
                         //.setSuperControllerClass("com.kichun."+packageName+".controller.AbstractController")
                         // 【实体】是否生成字段常量（默认 false）

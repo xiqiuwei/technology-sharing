@@ -40,9 +40,10 @@
         <!--pdf模块-->
         <module>management-topdf-demo</module>
         <!--spring 并发包-->
-        <module>management-spring-current</module>
+        <module>management-spring-current-demo</module>
         <!--shiro安全框架-->
         <module>management-shiro-demo</module>
+        <module>management-spring-security</module>
     </modules>
 
     <properties>

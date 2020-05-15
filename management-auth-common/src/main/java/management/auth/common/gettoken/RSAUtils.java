@@ -19,7 +19,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
-@SuppressWarnings("all")
+
 /**
  * @Author xiqiuwei
  * @Date Created in 10:00 2019/8/9
@@ -104,6 +104,7 @@ public class RSAUtils {
      * @Param [RSAKey]
      * @Description 将公钥写入到文件当中
      */
+    @SuppressWarnings("Duplicates")
     public void writePubRSAIntoResource(String RSAKey) throws IOException {
         String s = new ClassPathResource("/static/rsa.pub").getURL().toString();
         String substring = s.substring(6, s.length());
@@ -121,6 +122,7 @@ public class RSAUtils {
      * @Param [RSAKey]
      * @Description 将私钥写到文件当中
      */
+    @SuppressWarnings("Duplicates")
     public void writePriRSAIntoResource(String RSAKey) throws IOException {
         String s = new ClassPathResource("/static/rsa.pri").getURL().toString();
         String substring = s.substring(6, s.length());
