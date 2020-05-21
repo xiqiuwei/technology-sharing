@@ -1,0 +1,15 @@
+server:
+  port: 8999
+spring:
+  application:
+    name: security-server
+    ## thymeleaf模板引擎
+  thymeleaf:
+    cache: false
+    prefix: classpath:/views/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    #mode: HTML5
+    # 正常配置为:HTML5 但是现在取消thymeleaf使用nekohtml
+    mode: LEGACYHTML5

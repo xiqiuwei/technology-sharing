@@ -1,0 +1,7 @@
+server:
+  port: 8999
+spring:
+  application:
+    name: security-server
+definition:
+  my: this is uat environment
