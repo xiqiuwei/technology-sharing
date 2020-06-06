@@ -12,6 +12,6 @@ public class MyApplicationContext extends AnnotationConfigServletWebServerApplic
     @Override
     protected void initPropertySources() {
         super.initPropertySources();
-        getEnvironment().setRequiredProperties("MY_PROPERTIES");
+        getEnvironment().setRequiredProperties("ENV_NAME");
     }
 }

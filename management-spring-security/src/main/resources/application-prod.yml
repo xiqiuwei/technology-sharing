@@ -13,3 +13,19 @@ spring:
     #mode: HTML5
     # 正常配置为:HTML5 但是现在取消thymeleaf使用nekohtml
     mode: LEGACYHTML5
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/shiro_db?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&useSSL=false&useServerPrepStmts=false&rewriteBatchedStatements=true
+    username: root
+    password: root
+    initial-size: 5
+    max-active: 100
+    min-idle: 5
+    max-wait: 5000
+    test-on-borrow: true
+    test-while-idle: true
+    validation-query: select 1
+    test-on-return: false
+    min-evictable-idle-time-millis: 1800000
+    time-between-eviction-runs-millis: 600000
+    filters: config
