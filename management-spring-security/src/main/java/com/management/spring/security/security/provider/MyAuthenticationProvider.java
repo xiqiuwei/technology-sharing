@@ -32,12 +32,9 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         String encodePassword = bCrypt.encode(password);
         UserDetails userDetail = myUserDetailService.loadUserByUsername(userName);
         // matches password BCryptPasswordEncoder每次加密的字符串不一样，但是底层会对密码和slat进行分开处理对比
-        if (!password.equals(userDetail.getPassword())) {
-            throw new BadCredentialsException("密码错误");
-        }
-        boolean matches = bCrypt.matches(encodePassword, userDetail.getPassword());
+        boolean matches = bCrypt.matches(password,encodePassword);
         System.err.println("================"+matches);
-        if (!bCrypt.matches(encodePassword,userDetail.getPassword()))
+        if (!bCrypt.matches(password,encodePassword))
             throw new BadCredentialsException("invalid password!!! 请重新输入");
         return new UsernamePasswordAuthenticationToken(userName,password,userDetail.getAuthorities());
     }
