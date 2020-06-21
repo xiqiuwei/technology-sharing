@@ -3,7 +3,9 @@ server:
 spring:
   application:
     name: security-server
-    ## thymeleaf模板引擎
+  resources:
+    static-locations: classpath:/static/
+  ## thymeleaf模板引擎
   thymeleaf:
     # 不允许缓存
     cache: false

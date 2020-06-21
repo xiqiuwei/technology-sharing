@@ -1,32 +1,113 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>登陆</title>
-    <script th:src="@{/static/js/jquery-3.3.1.min.js}"></script>
-</head>
-<body>
-<h1>登陆</h1>
-<form method="post" action="/security/hello">
-    <div>
-        用户名：<input type="text" name="userName">
-    </div>
-    <div>
-        密码：<input type="password" name="loginPass">
-    </div>
-    <div>
-        <input type="text" class="form-control" name="verifyCode" required="required" placeholder="验证码">
-        <img src="/getVerifyCode" title="看不清，请点我" onclick="refresh(this)" onmouseover="mouseover(this)" />
-    </div>
-    <div>
-        <label><input type="checkbox" name="remember-me"/>自动登录</label>
-        <button type="submit">立即登陆</button>
-    </div>
-</form>
-<script>
-    function refresh(obj) { obj.src = "/getVerifyCode?" + Math.random(); }
+<!DOCTYPE HTML>
+<html lang="zxx">
 
-    function mouseover(obj) { obj.style.cursor = "pointer"; }
-</script>
+<head>
+	<title>登录</title>
+	<!-- Meta tag Keywords -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8" />
+	<meta name="keywords" content="Triple Forms Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!-- Meta tag Keywords -->
+
+	<!-- css files -->
+	<link rel="stylesheet" href="../static/css/font-awesome.min.css" type="text/css" media="all" />
+	<!-- Style-CSS -->
+	<link href="../static/css/style.css" rel="stylesheet">
+	<!-- Font-Awesome-Icons-CSS -->
+	<!-- //css files -->
+
+</head>
+
+<body>
+<form method="post" action="/security/hello">
+	<div class="main-bg" id="mian">
+		<!-- title -->
+		<h1>奚大哥秘制登录页面</h1>
+		<!-- //title -->
+		<div class="sub-main-w3">
+			<div class="image-style">
+
+			</div>
+			<!-- vertical tabs -->
+			<div class="vertical-tab">
+				<div id="section1" class="section-w3ls">
+					<input type="radio" name="sections" id="option1" checked>
+					<article>
+						<form action="#" method="post">
+							<h3 class="legend">账号登录</h3>
+							<div class="input">
+								<span class="fa fa-mobile-phone" aria-hidden="true"></span>
+								<input type="text" v-model="logindata.email" placeholder="用户名" name="email" required />
+							</div>
+							<div class="input">
+								<span class="fa fa-key" aria-hidden="true"></span>
+								<input type="password" v-model="logindata.password" placeholder="密码" name="password" required />
+							</div>
+							<div class="input">
+								<span class="fa fa-envelope-o" aria-hidden="true"></span>
+								<input type="text" class="form-control" name="verifyCode" required="required" placeholder="验证码">
+								<img src="/getVerifyCode" title="看不清，请点我" onclick="refresh(this)" onmouseover="mouseover(this)"/>
+							</div>
+							<input id=log type="submit" value="登录"/>
+							<a href="#">忘记密码?</a>
+						</form>
+					</article>
+				</div>
+			</div>
+
+			<!-- //vertical tabs -->
+			<div class="clear"></div>
+		</div>
+		<!-- copyright -->
+		<div class="copyright">
+			<h2>Copyright &copy; 2019 - {{nowYear}} 版权所有| by
+				<a href="#">xiqiuwei</a>
+			</h2>
+		</div>
+		<!-- //copyright -->
+	</div>
+</form>
 </body>
+<!-- script   -->
+<script src="https://www.jq22.com/jquery/vue.min.js"></script>
+<!-- JavaScript 代码需要放在尾部（指定的HTML元素之后） -->
+<script>
+new Vue({
+    el:'#mian',
+    data: {
+        nowYear:new Date().getFullYear(),
+        logindata:{
+				email:"",
+				password:"",
+				verifyCode:""
+			},
+			registerdata:{
+				name:"123@foxmail.com",
+				password:"admin123",
+				confirmPassword:"admin123"
+			},
+			forgetdata:{
+				email:"123@foxmail.com",
+			}
+    }
+});
+function refresh(obj) {
+	obj.src = "/getVerifyCode?" + Math.random();
+}
+
+function mouseover(obj) {
+	obj.style.cursor = "pointer";
+}
+</script>
+<!-- //script -->
+
 </html>

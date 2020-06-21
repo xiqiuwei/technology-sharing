@@ -48,8 +48,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //这里必须要写formLogin()，不然原有的UsernamePasswordAuthenticationFilter不会出现，也就无法配置我们重新的UsernamePasswordAuthenticationFilter
                 .formLogin().loginPage("/security/hello")
-                .successHandler(authenticationSuccessHandler)
-                .failureHandler(authenticationFailureHandler)
+                //.successHandler(authenticationSuccessHandler)
+                .defaultSuccessUrl("/security/success")
+                //.failureHandler(authenticationFailureHandler)
+                .failureUrl("/security/error")
                // .loginProcessingUrl("/security/success")
                 .authenticationDetailsSource(customAuthenticationDetailsSource)
                 .and()

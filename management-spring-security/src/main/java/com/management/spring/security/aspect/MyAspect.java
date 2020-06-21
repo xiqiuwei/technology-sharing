@@ -32,7 +32,7 @@ public class MyAspect {
     /**
      * 切面表达式
      */
-    @Pointcut("execution(public * com.management.spring.security.controller.*.*(..))")
+    @Pointcut("execution(public * com.management.spring.security.security.controller.*.*(..))")
     public void pointCut() {
     }
 
@@ -40,8 +40,6 @@ public class MyAspect {
     @Around("pointCut()")
     public String aroundAspect(ProceedingJoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
-        if (null == args || 0 == args.length)
-            return "参数不能为空！！！";
         String proceed = (String) joinPoint.proceed();
         for (Object arg : args) {
             for (String type : types) {
