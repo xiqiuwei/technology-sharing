@@ -5,7 +5,9 @@ spring:
     name: security-server
     ## thymeleaf模板引擎
   thymeleaf:
+    # 不允许缓存
     cache: false
+    # 自定义的classpath路径
     prefix: classpath:/views/
     check-template-location: true
     suffix: .html

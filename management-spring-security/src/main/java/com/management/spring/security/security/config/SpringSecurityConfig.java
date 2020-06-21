@@ -1,12 +1,15 @@
 package com.management.spring.security.security.config;
 
+import com.management.spring.security.security.filter.VerifyFilter;
 import com.management.spring.security.security.handler.*;
-import com.management.spring.security.security.usernamepassword.MyUsernamePasswordAuthenticationFilter;
+import com.management.spring.security.security.userdetail.CustomAuthenticationDetailsSource;
+import com.management.spring.security.security.filter.MyUsernamePasswordAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -32,29 +35,44 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private MyAuthenticationFailureHandler authenticationFailureHandler;
     @Autowired
     private MyLogoutSuccessHandler logoutSuccessHandler;
+    @Autowired
+    private CustomAuthenticationDetailsSource customAuthenticationDetailsSource;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .httpBasic()
-                .authenticationEntryPoint(authenticationEntryPoint)
-                .and()
-                .antMatcher("/**")
                 .authorizeRequests()
-                .antMatchers("/", "/login**").permitAll()
+                .antMatchers("/getVerifyCode","/security/hello","login.html").permitAll()
                 .anyRequest()
                 .authenticated()
+                .and()
                 //这里必须要写formLogin()，不然原有的UsernamePasswordAuthenticationFilter不会出现，也就无法配置我们重新的UsernamePasswordAuthenticationFilter
+                .formLogin().loginPage("/security/hello")
+                .successHandler(authenticationSuccessHandler)
+                .failureHandler(authenticationFailureHandler)
+               // .loginProcessingUrl("/security/success")
+                .authenticationDetailsSource(customAuthenticationDetailsSource)
                 .and()
-                .logout().logoutSuccessHandler(logoutSuccessHandler).permitAll()
-                .and()
-                .formLogin().loginPage("/")
+                .addFilterBefore(new VerifyFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterAt(myUsernamePasswordAuthenticationFilter(),UsernamePasswordAuthenticationFilter.class)
+                .logout().logoutSuccessHandler(logoutSuccessHandler)
+                .permitAll()
                 .and()
                 .csrf().disable();
         http.exceptionHandling().accessDeniedHandler(accessDeniedHandler); // 没有权限访问
-        http.addFilterAt(myUsernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.httpBasic().authenticationEntryPoint(authenticationEntryPoint);
+       // http.addFilter(myUsernamePasswordAuthenticationFilter());
 //        http.authorizeRequests()
 //                .antMatchers("/base/**").permitAll();
+        /**
+         *  .httpBasic()
+         *                 .authenticationEntryPoint(authenticationEntryPoint)
+         *                 .and()
+         *                 .antMatcher("/**")
+         *                 .authorizeRequests()
+         *                 .and()
+         */
+
 
     }
 
@@ -67,12 +85,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public MyUsernamePasswordAuthenticationFilter myUsernamePasswordAuthenticationFilter() throws Exception {
         MyUsernamePasswordAuthenticationFilter filter = new MyUsernamePasswordAuthenticationFilter();
-        filter.setAuthenticationSuccessHandler(authenticationSuccessHandler);
-        filter.setAuthenticationFailureHandler(authenticationFailureHandler);
-        filter.setFilterProcessesUrl("/login/token");
-        // 这里最主要的就是注入这个bean，我使用了WebSecurityConfigurerAdapter默认的AuthenticationManager
         filter.setAuthenticationManager(authenticationManagerBean());
         return filter;
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers("/resources/**", "/static/**", "/public/**", "/webui/**", "/h2-console/**"
+                        , "/configuration/**", "/swagger-resources/**", "/api-docs", "/api-docs/**", "/v2/api-docs/**"
+                        , "/**/*.css", "/**/*.js", "/**/*.ftl", "/**/*.png ", "/**/*.jpg", "/**/*.gif ", "/**/*.svg", "/**/*.ico", "/**/*.ttf", "/**/*.woff");
     }
 
 }

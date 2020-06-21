@@ -32,7 +32,7 @@ public class CountDownLatchController {
                     System.out.println("子线程" + Thread.currentThread().getName() + "正准备接受命令");
                     mainThread.await();// 子线程等待主线程唤醒
                     System.out.println("线程" + Thread.currentThread().getName() + "已接受命令");
-                    Thread.sleep((long) (Math.random() * 1000));
+                    Thread.sleep((long) (2000));
                     System.out.println("线程" + Thread.currentThread().getName() + "回应命令处理结果");
                     childThread.countDown();// 这个时候子线程-3 childThread为0后继续往下执行主线程                     
                 } catch (Exception e) {
@@ -44,8 +44,8 @@ public class CountDownLatchController {
         try {
             Thread.sleep((long) (Math.random() * 1000));
             System.out.println("主线程" + Thread.currentThread().getName() + "即将发布命令");
-            mainThread.countDown();//主线程唤醒子线程，mainThread -1为0时子线程开启  
             System.out.println("主线程" + Thread.currentThread().getName() + "已发送命令，正在等待结果");
+            mainThread.countDown();//主线程唤醒子线程，mainThread -1为0时子线程开启  
             childThread.await();// 等待子线程来唤醒
             System.out.println("线程" + Thread.currentThread().getName() + "已收到所有响应结果");
         } catch (Exception e) {
@@ -54,9 +54,9 @@ public class CountDownLatchController {
         service.shutdown();//任务结束，停止线程池的所有线程  
     }
 
-    @GetMapping("/index")
-    public ModelAndView testMethod(HttpServletRequest request) {
-        ModelAndView model = new ModelAndView();
-        return model;
-    }
+//    @GetMapping("/index")
+//    public ModelAndView testMethod(HttpServletRequest request) {
+//        ModelAndView model = new ModelAndView();
+//        return model;
+//    }
 }

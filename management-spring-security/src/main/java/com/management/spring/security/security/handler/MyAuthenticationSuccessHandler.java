@@ -25,6 +25,6 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
         httpServletResponse.setContentType("application/json;charset=utf-8");
         httpServletResponse
                 .getWriter()
-                .write(json.writeValueAsString(ResponseEntity.fail("登录成功",10013)));
+                .write(json.writeValueAsString(ResponseEntity.success("登录成功")));
     }
 }

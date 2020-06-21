@@ -21,32 +21,38 @@ public class ThreadDemo {
 
     public static void threadTest() {
         MyThreadPool myThreadPool = new MyThreadPool();
-        Callable<Integer> callable1 = new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return 1;
+        Callable<Integer> callable1 = () -> {
+            // 模拟线程业务耗时
+            Thread.sleep(5000);
+            String name = Thread.currentThread().getName();
+            Integer i = 18;
+            if (null == i) {
+                throw new Exception("线程" + name + "抛出了异常,返回值类型不能为空");
             }
+            return i;
         };
-        Callable<Integer> callable2 = new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return 2;
-            }
+        Callable<Integer> callable2 = () -> {
+            Thread.sleep(3000);
+            return 25;
         };
+
+        Runnable runnable1 = () -> System.out.println("这是无返回结果的runnable接口");
+
         try {
-            Integer submit1 = (Integer) myThreadPool.submit(callable1);
-            Integer submit2 = (Integer) myThreadPool.submit(callable2);
-            System.err.println(submit1);
-            System.err.println(submit2);
+            Future<?> result1 = myThreadPool.submit(callable1);
+            Future<?> result2 = myThreadPool.submit(callable2);
+            myThreadPool.execute(runnable1);
+            System.out.println("因为callable中执行的任务比较耗时,我先执行这里的逻辑");
+            System.out.println("这里我去拿线程池的返回结果合:" + ((Integer) result1.get() + (Integer) result2.get()));
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             myThreadPool.shutdown();
         }
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 //        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(2);
 //        scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
 //            @Override
@@ -63,6 +69,29 @@ public class ThreadDemo {
 //                System.err.println("《=========Thread End Time: " + DateFormat.getTimeInstance().format(new Date()));
 //            }
 //        },0,5000, TimeUnit.MILLISECONDS);
-        threadTest();
+        //threadTest();
+//        CountDownLatch countDownLatch = new CountDownLatch(2);
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    System.out.println("子线程1执行完后等待");
+//                    Thread.sleep(5000);
+//                    countDownLatch.countDown();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                System.out.println("子线程2执行完后等待");
+//                countDownLatch.countDown();
+//            }
+//        }).start();
+//        countDownLatch.await();
+//        System.out.println("最后执行主线程");
     }
+
 }

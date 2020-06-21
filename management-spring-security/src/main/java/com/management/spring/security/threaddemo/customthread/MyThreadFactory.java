@@ -21,7 +21,7 @@ public class MyThreadFactory implements ThreadFactory {
     public Thread newThread(@Nullable Runnable r) {
         int index = atomicInteger.incrementAndGet();
         Thread thread = new Thread(r, "My-Thread-" + index);
-        System.out.println("当前执行的线程" + thread.getName());
+        System.out.println("当前执行的线程:" + thread.getName());
         return thread;
     }
 }
